@@ -1,0 +1,91 @@
+/* <div class="wrapper mx-2">
+              <input
+                type="radio"
+                name="select"
+                id="option-1"
+                v-model="member.id"
+                :value="member.id"
+              />
+              <input
+                type="radio"
+                name="select"
+                id="option-2"
+                v-model="member.id"
+                :value="member.id"
+              />
+              <label for="option-1" class="option option-1">
+                <div class="dot"></div>
+                <span>Morning Friend</span>
+              </label>
+              <label for="option-2" class="option option-2">
+                <div class="dot"></div>
+                <span>Afternoon Friends</span>
+              </label>
+            </div>  */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  padding: 2px;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+  .option {
+    background: #e5ddc8;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
+  }
+  .option .dot {
+    height: 20px;
+    width: 20px;
+    background: #e5ddc8;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+  }
+  .option .dot::before {
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: #052e5a;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+  }
+}
+input[type="radio"] {
+  display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2 {
+  border-color: #0069d9;
+  background: #072a50;
+}
+#option-1:checked:checked ~ .option-1 .dot,
+#option-2:checked:checked ~ .option-2 .dot {
+  background: #db1f48;
+}
+#option-1:checked:checked ~ .option-1 .dot::before,
+#option-2:checked:checked ~ .option-2 .dot::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.wrapper .option span {
+  color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span {
+  color: #e5ddc8;
+}
