@@ -1,0 +1,57 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "name": "json-server",
+      "category": "typicode"
+    }
+  ],
+  "members": [
+    {
+      "name": "melih",
+      "category": [
+        "morning"
+      ],
+      "id": 1669720299431
+    },
+    {
+      "name": "çetin",
+      "category": [
+        "morning"
+      ],
+      "id": 1669720302999
+    },
+    {
+      "name": "demir",
+      "category": [
+        "night"
+      ],
+      "id": 1669720305703
+    },
+    {
+      "name": "erfan",
+      "category": [
+        "afternoon"
+      ],
+      "id": 1669720308223
+    }
+  ],
+  "groups": [
+    {
+      "groupName": "morning",
+      "id": 1
+    },
+    {
+      "groupName": "lunch",
+      "id": 2
+    },
+    {
+      "groupName": "afternoon",
+      "id": 3
+    },
+    {
+      "groupName": "night",
+      "id": 4
+    }
+  ]
+}
