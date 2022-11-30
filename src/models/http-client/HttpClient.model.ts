@@ -45,20 +45,16 @@ export class HttpClientModel implements HttpClientInterface {
   }
   post<T>(parameters: HttpRequestParamsInterface): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      const { url /* requiresToken, payload */ } = parameters;
+      const { url, payload /* requiresToken, payload */ } = parameters;
       // axios options
       const options: AxiosRequestConfig = {
         headers: {},
       };
-      /* if (requiresToken) {
-                const token = this.getToken();
-                options.headers.RequestVerificationToken = token;
-            } */
-      const payload = {};
       axios
         .post(url, payload, options)
         .then((response: AxiosResponse) => {
           resolve(response.data as T);
+          /* console.log(payload,"payload"); */
         })
         .catch((response: AxiosResponse) => {
           console.log("------ rejecting ----");

@@ -25,32 +25,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from "vue";
+import { ref } from "vue";
 import { IMember } from "@/models/Member.interface";
 import { IGroup } from "@/models/Group.interface";
 import { UsersService } from "@/services/User.service";
-import { useStore } from "vuex";
 import axios from "axios";
 
-const store = useStore();
 const membersService = new UsersService();
 
 const name = ref("");
 
-const emit = defineEmits(["memberName"]);
-
-const addMember = () => {
-  const members: IMember = {
-    id: Date.now(),
-    name: name.value,
-  };
-  store.state.members.push(members);
-  /* emit("members", members); */
-  localStorage.setItem("member", JSON.stringify(members));
-  name.value = "";
-};
-
-const postMember = () => {
+/* const postMember = () => {
   const members: IMember = {
     id: Date.now(),
     name: name.value,
@@ -62,7 +47,19 @@ const postMember = () => {
       window.location.reload();
     });
   name.value = "";
-};
+}; */
+
+const postMember =()=>{
+  const members: IMember = {
+    id: Date.now(),
+    name: name.value,
+    category: [],
+  };
+  membersService.postUser(members).then((response) => {
+    window.location.reload(); 
+  });
+  name.value = "";
+}
 </script>
 
 <style scoped></style>

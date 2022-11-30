@@ -41,7 +41,7 @@ const groupName = ref("");
 const emit = defineEmits(["groupName"]);
 
 
-const createGroup = () => {
+/* const createGroup = () => {
   const group: IGroup = {
     id: Date.now(),
     groupName: groupName.value,
@@ -52,10 +52,10 @@ const createGroup = () => {
   //emit("groupName", group.name);
   groupName.value = "";
   localStorage.setItem("countGroup", JSON.stringify(store.state.countGroup));
-};
+}; */
 
 
-const postGroups = () => {
+/* const postGroups = () => {
   const groups: IGroup = {
     groupName: groupName.value,
   };
@@ -66,6 +66,17 @@ const postGroups = () => {
     });
   window.location.reload();
   groupName.value = "";
+}; */
+
+const categoryService = new GroupsServices();
+
+const postGroups = () => {
+  const groups: IGroup = {
+    groupName: groupName.value,
+  };
+  categoryService.postGroup(groups).then((response) => {
+    window.location.reload();
+  });
 };
 
 

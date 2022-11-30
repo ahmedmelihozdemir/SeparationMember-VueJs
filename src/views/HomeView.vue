@@ -42,9 +42,6 @@
           3)After clicking listing in the member list, you should use the list
           button to show the member in the category.
         </span>
-        <span>
-          
-        </span>
       </div>
     </div>
   </div>
@@ -59,7 +56,6 @@ import AfternoonFriends from "@/components/AfternoonFriends.vue";
 import MemberAdd from "@/components/MemberAdd.vue";
 import CreateGroup from "@/components/CreateGroup.vue";
 import DefaultGroup from "@/components/DefaultGroup.vue";
-
 import { IGroup } from "@/models/Group.interface";
 import { GroupsServices } from "@/services/Group.service";
 

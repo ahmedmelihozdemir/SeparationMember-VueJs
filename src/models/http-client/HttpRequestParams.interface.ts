@@ -5,6 +5,6 @@
  */
 export interface HttpRequestParamsInterface {
     url: string;
+    payload?: any;
     /* requiresToken: boolean; */
-    /* payload?: any; */
 }

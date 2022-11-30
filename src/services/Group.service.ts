@@ -11,10 +11,23 @@ export class GroupsServices {
     };
     return HttpClient.get<IGroup[]>(groupRequest);
   }
-  postGroup() {
+  postGroup(data: any) {
+    const groupRequest: HttpRequestParamsInterface = {
+      url: `http://localhost:3000/groups`,
+      payload: data,
+    };
+    return HttpClient.post<IGroup[]>(groupRequest);
+  }
+  putGroup() {
     const groupRequest: HttpRequestParamsInterface = {
       url: `http://localhost:3000/groups`,
     };
-    return HttpClient.post<IGroup[]>(groupRequest);
+    return HttpClient.put<IGroup[]>(groupRequest);
+  }
+  deleteGroup() {
+    const groupRequest: HttpRequestParamsInterface = {
+      url: `http://localhost:3000/groups`,
+    };
+    return HttpClient.delete<IGroup[]>(groupRequest);
   }
 }

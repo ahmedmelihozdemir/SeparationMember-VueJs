@@ -11,10 +11,23 @@ export class UsersService {
     };
     return HttpClient.get<IMember[]>(memberRequest);
   }
-  postUser() {
+  postUser(data: any) {
+    const memberRequest: HttpRequestParamsInterface = {
+      url: `http://localhost:3000/members`,
+      payload: data,
+    };
+    return HttpClient.post<IMember[]>(memberRequest);
+  }
+  putUser() {
     const memberRequest: HttpRequestParamsInterface = {
       url: `http://localhost:3000/members`,
     };
-    return HttpClient.post<IMember[]>(memberRequest);
+    return HttpClient.put<IMember[]>(memberRequest);
+  }
+  deleteUser() {
+    const memberRequest: HttpRequestParamsInterface = {
+      url: `http://localhost:3000/members`,
+    };
+    return HttpClient.delete<IMember[]>(memberRequest);
   }
 }
