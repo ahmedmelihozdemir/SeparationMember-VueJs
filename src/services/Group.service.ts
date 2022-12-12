@@ -18,15 +18,16 @@ export class GroupsServices {
     };
     return HttpClient.post<IGroup[]>(groupRequest);
   }
-  putGroup() {
+  putGroup(id: number, data: any) {
     const groupRequest: HttpRequestParamsInterface = {
-      url: `http://localhost:3000/groups`,
+      url: `http://localhost:3000/groups/${id}`,
+      payload: data,
     };
     return HttpClient.put<IGroup[]>(groupRequest);
   }
-  deleteGroup() {
+  deleteGroup(id: number) {
     const groupRequest: HttpRequestParamsInterface = {
-      url: `http://localhost:3000/groups`,
+      url: `http://localhost:3000/groups/${id}`,
     };
     return HttpClient.delete<IGroup[]>(groupRequest);
   }

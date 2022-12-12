@@ -24,9 +24,9 @@ export class UsersService {
     };
     return HttpClient.put<IMember[]>(memberRequest);
   }
-  deleteUser() {
+  deleteUser(id: number) {
     const memberRequest: HttpRequestParamsInterface = {
-      url: `http://localhost:3000/members`,
+      url: `http://localhost:3000/members/${id}`,
     };
     return HttpClient.delete<IMember[]>(memberRequest);
   }

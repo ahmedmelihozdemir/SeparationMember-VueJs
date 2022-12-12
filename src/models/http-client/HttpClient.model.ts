@@ -20,18 +20,12 @@ export class HttpClientModel implements HttpClientInterface {
     const token = localStorage.getItem(TOKEN_KEY) || "";
     return token;
   }
-  /* constructor() {} */
   get<T>(parameters: HttpRequestParamsInterface): Promise<T> {
     return new Promise<T>((resolve, reject) => {
       const { url /* requiresToken */ } = parameters;
-      // axios options
       const options: AxiosRequestConfig = {
         headers: {},
       };
-      /* if (requiresToken) {
-                const token = this.getToken();
-                options.headers.RequestVerificationToken = token;
-            } */
       axios
         .get(url, options)
         .then((response: AxiosResponse) => {
@@ -54,7 +48,6 @@ export class HttpClientModel implements HttpClientInterface {
         .post(url, payload, options)
         .then((response: AxiosResponse) => {
           resolve(response.data as T);
-          /* console.log(payload,"payload"); */
         })
         .catch((response: AxiosResponse) => {
           console.log("------ rejecting ----");
@@ -62,17 +55,12 @@ export class HttpClientModel implements HttpClientInterface {
         });
     });
   }
-  put<T>(parameters: HttpRequestParamsInterface): Promise<T> {
+  /* put<T>(parameters: HttpRequestParamsInterface): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      const { url /* requiresToken, payload */ } = parameters;
-      // axios options
+      const { url } = parameters;
       const options: AxiosRequestConfig = {
         headers: {},
       };
-      /* if (requiresToken) {
-                const token = this.getToken();
-                options.headers.RequestVerificationToken = token;
-            } */
       const payload = {};
       axios
         .put(url, payload, options)
@@ -84,18 +72,30 @@ export class HttpClientModel implements HttpClientInterface {
           reject(response);
         });
     });
-  }
-  delete<T>(parameters: HttpRequestParamsInterface): Promise<T> {
+  } */
+  put<T>(parameters: HttpRequestParamsInterface): Promise<T> {
     return new Promise<T>((resolve, reject) => {
-      const { url /* requiresToken */ } = parameters;
-      // axios options
+      const { url, payload } = parameters;
       const options: AxiosRequestConfig = {
         headers: {},
       };
-      /* if (requiresToken) {
-                const token = this.getToken();
-                options.headers.RequestVerificationToken = token;
-            } */
+      axios
+        .post(url, payload, options)
+        .then((response: AxiosResponse) => {
+          resolve(response.data as T);
+        })
+        .catch((response: AxiosResponse) => {
+          console.log("------ rejecting ----");
+          reject(response);
+        });
+    });
+  }
+  delete<T>(parameters: HttpRequestParamsInterface): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+      const { url, id } = parameters;
+      const options: AxiosRequestConfig = {
+        headers: {},
+      };
       axios
         .delete(url, options)
         .then((response: AxiosResponse) => {
