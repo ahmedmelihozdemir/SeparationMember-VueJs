@@ -5,25 +5,33 @@
       <MemberAdd />
       <CreateGroup />
     </div>
-    <div class="grid grid-cols-2">
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2"
+    >
       <!-- Member list selection -->
-      <MemberList @selectedMember="listMember" />
+      <MemberList />
+      <!-- <MorningList /> -->
+
       <div>
         <!-- Typing friends selection -->
-        <!-- <div v-for="group in store.state.countGroup" :key="group.id">
-          <DefaultGroup :cameGroupName="cameGroupName" />
-        </div> -->
-
         <div v-for="(group, idx) in getCategories" :key="idx">
+          <DefaultGroup
+            :group="group"
+            :idx="idx"
+            :getCategories="getCategories"
+          />
+        </div>
+        <!-- <div v-for="(group, idx) in getCategories" :key="idx">
           <MorningFriends
             :group="group"
             :idx="idx"
             :getCategories="getCategories"
-            :cameSelectedMember="cameSelectedMember"
           />
-        </div>
+        </div> -->
       </div>
     </div>
+
     <div
       class="flex flex-col justify-center items-center p-2 m-2 rounded-lg bg-[#E2808A]"
     >
@@ -33,6 +41,7 @@
       >
         help
       </span>
+
       <div class="flex flex-col" v-if="help">
         <span> 1) List members individually. </span>
         <span>
@@ -49,7 +58,6 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import { useStore } from "vuex";
 import MemberList from "@/components/MemberList.vue";
 import MorningFriends from "@/components/MorningFriends.vue";
 import AfternoonFriends from "@/components/AfternoonFriends.vue";
@@ -59,7 +67,7 @@ import DefaultGroup from "@/components/DefaultGroup.vue";
 import { IGroup } from "@/models/Group.interface";
 import { GroupsServices } from "@/services/Group.service";
 
-const store = useStore();
+import MorningList from "@/components/MorningList.vue";
 
 const help = ref(false);
 
@@ -68,16 +76,6 @@ const getCategories = reactive<IGroup[]>([]);
 const getcategory = async () => {
   const res = await categoryService.getGroup();
   getCategories.push(...res);
-};
-
-const cameGroupName = ref("");
-const emitGroupName = (e: string) => {
-  cameGroupName.value = e;
-};
-
-const cameSelectedMember = ref("");
-const listMember = (e: string) => {
-  cameSelectedMember.value = e;
 };
 
 onMounted(() => {

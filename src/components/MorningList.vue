@@ -6,7 +6,7 @@
     <div class="flex justify-between items-start m-auto">
       <ul>
         <li
-          v-for="(member, idx) in members"
+          v-for="(member, idx) in filterMembers"
           :key="idx"
           class="grid grid-cols-4 gap-10 items-center justify-center m-6"
         >
@@ -19,7 +19,7 @@
             >
               <div class="ul-checkbox p-1">
                 <li
-                  class="flex justify-between items-center"
+                  class="flex justify-start items-center"
                   v-for="(group, adx) in getCategories"
                   :key="adx"
                 >
@@ -62,7 +62,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, computed, watchEffect } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
 import { IMember } from "@/models/Member.interface";
 import { IGroup } from "@/models/Group.interface";
@@ -78,6 +78,7 @@ const members = reactive<IMember[]>([]);
 const getMembers = async () => {
   const res = await membersInfoService.getUser();
   members.push(...res);
+  filterMembers.value = members;
 };
 
 //Group service
@@ -86,13 +87,11 @@ const getCategories = reactive<IGroup[]>([]);
 const getCategory = async () => {
   const res = await categoryService.getGroup();
   getCategories.push(...res);
-  store.state.countGroup++;
 };
 
+
 const selectedCategory = ref([]);
-
 const selectedMember = ref([]);
-
 const listCategories = (w) => {
   store.state.categories = selectedCategory;
   selectedCategory.value.map((item) => {
@@ -115,9 +114,19 @@ const listCategories = (w) => {
     });
 };
 
-const deleteMember = (i) => {
+/* const deleteMember = (i) => {
   const res = axios.delete(`http://localhost:3000/members/${i}`).then(() => {
-    window.location.reload();
+    members.splice(i, 1);
+    filterMembers.value = filterMembers.value.filter((item) => item.id !== i);
+    console.log(filterMembers.value);
+  });
+}; */
+
+const filterMembers = ref(members);
+const deleteMember = (idx: number) => {
+  membersInfoService.deleteUser(idx).then(() => {
+    members.splice(idx, 1);
+    filterMembers.value = filterMembers.value.filter((item) => item.id !== idx);
   });
 };
 

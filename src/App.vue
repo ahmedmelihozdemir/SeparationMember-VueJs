@@ -1,11 +1,6 @@
 <template>
   <div>
-    <nav class="flex justify-center">
-      <!-- <router-link to="/" class="m-2 hover:text-green-500">Home</router-link>
-      <router-link to="/about" class="m-2 hover:text-green-500"
-        >About</router-link
-      > -->
-    </nav>
+    <nav class="flex justify-center"></nav>
     <router-view />
   </div>
 </template>
